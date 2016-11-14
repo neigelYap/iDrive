@@ -14,6 +14,11 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	
+	<error-page>
+		<error-code>404</error-code>
+        <location>/error.html</location>
+    </error-page>
+	
 	<context-param>
 	<param-name>dbDriver</param-name>
 	<param-value>com.mysql.jdbc.Driver</param-value>

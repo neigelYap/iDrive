@@ -49,15 +49,19 @@ public class ImportCSVServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Part filePart = request.getPart("csv");
-		String fileName = getSubmittedFileName(filePart);
-	
-		CSVMethodsClass csv = new CSVMethodsClass();
+		try{
+			Part filePart = request.getPart("csv");
+			String fileName = getSubmittedFileName(filePart);
 		
-		csv.setFile(fileName);
-		csv.process(filePart,connection);
-		
-		response.sendRedirect("administrator");
+			CSVMethodsClass csv = new CSVMethodsClass();
+			
+			csv.setFile(fileName);
+			csv.process(filePart,connection);
+			
+			response.sendRedirect("administrator");
+		}catch(Exception e){
+			
+		}
 	}
 	
 	private static String getSubmittedFileName(Part part) {

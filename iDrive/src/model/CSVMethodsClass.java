@@ -192,9 +192,9 @@ public class CSVMethodsClass {
 
 			int accType = 0;
 			
-			if(columns[5].equals("Manager")){
+			if(columns[5].toUpperCase().equals("MANAGER")){
 				accType =2;
-			}else if(columns[5].equals("Admin")){
+			}else if(columns[5].toUpperCase().equals("ADMIN")){
 				accType=3;
 			}else{
 				accType = 1;
@@ -207,7 +207,7 @@ public class CSVMethodsClass {
 				pstmt.setInt(1, Integer.parseInt(columns[4])); //empId
 				pstmt.setString(2, columns[0]); //firstname
 				pstmt.setString(3, columns[1]); //lastname
-				pstmt.setString(4, columns[3]); //department
+				pstmt.setString(4, columns[3].toUpperCase()); //department
 				pstmt.setString(5,columns[2]); //email
 				pstmt.setString(6, columns[4]+columns[1]);//pass (default is employee num+lastname)
 				pstmt.setInt(7, accType); //accountTypeID
@@ -223,7 +223,7 @@ public class CSVMethodsClass {
 				pstmt.setInt(1, Integer.parseInt(columns[4])); //empId
 				pstmt.setString(2, columns[0]); //firstname
 				pstmt.setString(3, columns[1]); //lastname
-				pstmt.setString(4, columns[3]); //department
+				pstmt.setString(4, columns[3].toUpperCase()); //department
 				pstmt.setString(5,columns[2]); //email
 				pstmt.setInt(6, accType); //accountTypeID
 				pstmt.setInt(7,Integer.parseInt(columns[4]));

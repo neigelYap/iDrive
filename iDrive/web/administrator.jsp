@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="base.css" type="text/css">
+<link rel="stylesheet" href="base2.css" type="text/css">
 <title>iDrive</title>
 </head>
 <body>
@@ -31,23 +31,39 @@
 			iDrive
 			</a>
 		</div>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a class="navbar-brand" href="#">Welcome, Admin</a></li>
-		</ul>
 	</div>
 	</div>
 </div>
-	<form action = "import.html" method="post" enctype="multipart/form-data">
+<div class="container">
+<div class="row">
+  <div class="col-sm-6">
+	<div class="well">
+		<form action = "import.html" method="post" enctype="multipart/form-data">
 		<div class="form-group"> 
-			<input type ="file" name="csv" accept=".csv">
+			<input type ="file" name="csv" accept=".csv" required="required">
 			<button type ="submit" class="btn btn-primary">Import</button>
 		</div>
 	</form>
-	<form action="logoutservlet.html" method="post">
-		<div class="form-group"> 
-	    	<button type="submit" class="btn btn-primary">Logout</button>
-  		</div>
-	</form>
+	</div>
+	</div>
+	<div class="col-sm-6">
+	<div class="well">
+		<%
+			String first = (String)session.getAttribute("fName");
+			String last = (String)session.getAttribute("lName");
+			String fullName = first+" "+last;
+			out.println("<h3>"+fullName+"</h3>");
+		%>
+				<form action="logoutservlet.html" method="post">
+			<div class="form-group"> 
+		    	<button type="submit" class="btn btn-primary">Logout</button>
+	  		</div>
+		</form>
+	</div>
+	</div>
+</div>
+</div>
+
 </body>
 </html>
 <%

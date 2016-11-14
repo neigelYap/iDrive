@@ -8,6 +8,10 @@ import java.sql.SQLException;
 public class Validate {
 	private String username;
 	private String password;
+	private String fName;
+	private String lName;
+	private String email;
+	private String deptName;
 
 	public String getUsername() {
 		return username;
@@ -21,7 +25,30 @@ public class Validate {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public String getfName() {
+		return fName;
+	}
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+	public String getlName() {
+		return lName;
+	}
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
 	public int accountChecker(Connection connection){
 		try{
 			String query = "SELECT * FROM employee WHERE employeeID = ? AND pass =  ?";
@@ -30,6 +57,10 @@ public class Validate {
 			pstmt.setString( 2, getPassword()); 
 			ResultSet rs =pstmt.executeQuery();
 			if(rs.next()){
+				setfName(rs.getString("firstName"));
+				setlName(rs.getString("lastName"));
+				setDeptName(rs.getString("departmentName"));
+				setEmail(rs.getString("email"));
 				return rs.getInt("accountTypeID");
 			}else{
 				return 0;

@@ -70,6 +70,10 @@ public class AccountCheckerServlet extends HttpServlet {
 					request.setAttribute("account", username);
 					request.setAttribute("type", accountType);
 					request.setAttribute("pass", password);
+					request.setAttribute("fName", val.getfName());
+					request.setAttribute("lName", val.getlName());
+					request.setAttribute("deptName", val.getDeptName());
+					request.setAttribute("email", val.getEmail());
 					
 					request.getRequestDispatcher("accountseparator.html").forward(request,response);
 				}else{

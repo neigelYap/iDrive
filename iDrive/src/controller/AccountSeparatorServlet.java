@@ -20,7 +20,10 @@ public class AccountSeparatorServlet extends HttpServlet {
 		int accType = (int) request.getAttribute("type");
 		int acc = (int) request.getAttribute("account");
 		String pass = (String) request.getAttribute("pass");
-		
+		String fName = (String) request.getAttribute("fName");
+		String lName = (String) request.getAttribute("lName");
+		String email = (String) request.getAttribute("email");
+		String deptName = (String) request.getAttribute("deptName");
 		
 		String location = "";
 		if(acc != 0 && accType != 0 && pass != null){
@@ -38,6 +41,10 @@ public class AccountSeparatorServlet extends HttpServlet {
 			session.setAttribute("account", acc);
 			session.setAttribute("type", accType);
 			session.setAttribute("pass", pass);
+			session.setAttribute("fName", fName);
+			session.setAttribute("lName", lName);
+			session.setAttribute("deptName", deptName);
+			session.setAttribute("email", email);
 			response.sendRedirect(location);
 		}else{
 			request.setAttribute("invalid", "Account does not exist");

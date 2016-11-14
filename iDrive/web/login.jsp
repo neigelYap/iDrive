@@ -3,7 +3,7 @@
 		
 		int type = (Integer) session.getAttribute("type");
 		if(type == 1){
-			response.sendRedirect("employe");
+			response.sendRedirect("employee");
 		}else if(type == 2){
 			response.sendRedirect("manager");
 		}else if(type == 3){
@@ -17,21 +17,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="base.css" type="text/css">
+<link rel="stylesheet" href="base2.css" type="text/css">
 <title>iDrive</title>
 </head>
 <body>
-<div class="navbar navbar-default navbar-static-top">
-	<div class="container">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand">iDrive <span class="glyphicon glyphicon-road"></span></a>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="container">
-<div class="jumbotron"><h1>iDrive</h1></div>
 <div class="row">
   <div class="col-sm-4"></div>
   <div class="col-sm-4"></div>
@@ -39,7 +29,7 @@
 </div>
 <div class="row">
   <div class="col-md-4"></div>
-  <div class="col-md-4">
+  <div class="col-md-4"><h2 style="margin-top: 200px">iDrive</h2>
 <div class="well">
 	<%
 		String error = (String)request.getAttribute("invalid");
@@ -59,13 +49,14 @@
     	<label for="password">Password:</label>
 	    <input type="password" class="form-control" name="password" id="password" placeholder="Password"required="required">
   	</div>
-
+  	<div class="form-group">
+<a href="google.com"><b>Forgot your password?</b></a></div>
   	<div class="form-group"> 
 	    <center><button type="submit" class="btn btn-primary btn-block">Login</button></center>
   	</div>
 	</form>
 </div>
-</div>
+ </div>
   <div class="col-md-4"></div>
 </div>
 </div>

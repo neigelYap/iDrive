@@ -20,6 +20,10 @@ public class LogoutServlet extends HttpServlet {
 		session.removeAttribute("account");
 		session.removeAttribute("type");
 		session.removeAttribute("pass");
+		session.removeAttribute("fName");
+		session.removeAttribute("lName");
+		session.removeAttribute("deptName");
+		session.removeAttribute("email");
 		session.invalidate();
 		
 		response.sendRedirect("login");
