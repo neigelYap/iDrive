@@ -67,7 +67,7 @@ public class SendReservationServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int accType = (Integer)session.getAttribute("type");
 		int empId = (Integer)session.getAttribute("account");
-		String department = (String)session.getAttribute("deptName");
+		int department = (Integer)session.getAttribute("deptName");
 		switch(accType){
 			case 1: 
 				location = "employee";
@@ -101,7 +101,7 @@ public class SendReservationServlet extends HttpServlet {
 								sender.setNumPassengers(numPassengers);
 								sender.setPassengers(passengers);
 								sender.setEmpId(empId);
-								sender.sendReservation(connection);
+								sender.sendReservation(connection, accType, department);
 								EmailSender emSend = new EmailSender();
 								emSend.reservationSent(connection,accType,department);
 								request.setAttribute("successMsg", "Reservation has been successfully sent for approval");

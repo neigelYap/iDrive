@@ -15,10 +15,16 @@ public class InputValidationClass {
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
+		Calendar yearCalendar = Calendar.getInstance();
 		Date dateThreeDaysFromNow = new Date();
+		Date dateThreeMonthsFromNow = new Date();
 		calendar.setTime(dateThreeDaysFromNow);
 		calendar.add(Calendar.DATE, 3);
+		yearCalendar.setTime(dateThreeDaysFromNow);
+		yearCalendar.add(Calendar.MONTH, 3);
 		dateThreeDaysFromNow = calendar.getTime();
+		dateThreeMonthsFromNow = yearCalendar.getTime();
+		
 		if(date == null){
 			return false;
 		} else {
@@ -40,16 +46,27 @@ public class InputValidationClass {
 			} else {
 				System.out.println("all valid characters");
 				try {
-					Date threeDaysFromNow = dateFormat.parse(dateFormat.format(dateThreeDaysFromNow));
 					Date inputDate = dateFormat.parse(dateFormat.format(dateFormat.parse(date)));
+					dateThreeDaysFromNow = dateFormat.parse(dateFormat.format(dateThreeDaysFromNow));
+					dateThreeMonthsFromNow = dateFormat.parse(dateFormat.format(dateThreeMonthsFromNow));
 					
-						if(inputDate.equals(threeDaysFromNow) || inputDate.after(threeDaysFromNow)){
+					if(inputDate.equals(dateThreeMonthsFromNow) || inputDate.before(dateThreeMonthsFromNow)){
+						
+						System.out.println("Valid Year");
+						
+						if(inputDate.equals(dateThreeDaysFromNow) || inputDate.after(dateThreeDaysFromNow)){
 							System.out.println("Correct Date, you entered " + inputDate.toString());
 							return true;
 						} else {
-							System.out.println("Wrong date, you entered " + inputDate.toString() + " must be on or before this date: " + threeDaysFromNow.toString());
+							System.out.println("Wrong date, you entered " +inputDate.toString() + " must be on or after this date: " + dateThreeDaysFromNow.toString());
 							return false;
 						}
+					} else {
+						System.out.println("You're not from the future.");
+						return false;
+					}
+					
+						
 						
 				} catch (ParseException e) {
 					e.printStackTrace();

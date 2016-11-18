@@ -75,7 +75,7 @@ public class EmailSender {
 	}
 	//When reservation form is first sent to the managers or the administrator (if the managers are the ones
 	//who sent it).
-	public void reservationSent(Connection connection, int accType, String department){
+	public void reservationSent(Connection connection, int accType, int department){
 		String receiver="";
 		int receiverAccType;
 		if(accType == 1){
@@ -89,7 +89,7 @@ public class EmailSender {
 			if(receiverAccType==2){
 				String query = "SELECT * FROM employee WHERE departmentName = ? AND accountTypeID =  ?";
 				PreparedStatement pstmt = connection.prepareStatement(query);
-				pstmt.setString( 1, department);
+				pstmt.setInt( 1, department);
 				pstmt.setInt( 2, receiverAccType); 
 				ResultSet rs =pstmt.executeQuery();
 				if(rs.next()){
@@ -101,7 +101,7 @@ public class EmailSender {
 				String query = "SELECT * FROM employee WHERE accountTypeID = ? AND departmentName = ?";
 				PreparedStatement pstmt = connection.prepareStatement(query);
 				pstmt.setInt( 1, receiverAccType);
-				pstmt.setString( 2, "FACILITIES");
+				pstmt.setInt( 2, 1);
 				ResultSet rs =pstmt.executeQuery();
 				if(rs.next()){
 					receiver = rs.getString("email");

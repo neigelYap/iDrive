@@ -11,7 +11,7 @@ public class Validate {
 	private String fName;
 	private String lName;
 	private String email;
-	private String deptName;
+	private int deptName;
 
 	public String getUsername() {
 		return username;
@@ -43,10 +43,10 @@ public class Validate {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getDeptName() {
+	public int getDeptName() {
 		return deptName;
 	}
-	public void setDeptName(String deptName) {
+	public void setDeptName(int deptName) {
 		this.deptName = deptName;
 	}
 	public int accountChecker(Connection connection){
@@ -59,10 +59,11 @@ public class Validate {
 			if(rs.next()){
 				setfName(rs.getString("firstName"));
 				setlName(rs.getString("lastName"));
-				setDeptName(rs.getString("departmentName"));
+				setDeptName(rs.getInt("departmentName"));
 				setEmail(rs.getString("email"));
 				return rs.getInt("accountTypeID");
 			}else{
+				
 				return 0;
 			}
 		}catch(SQLException sqle){

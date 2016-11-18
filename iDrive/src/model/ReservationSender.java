@@ -72,9 +72,9 @@ public class ReservationSender {
 	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
-	public void sendReservation(Connection connection){
+	public void sendReservation(Connection connection, int accType, int dept){
 		try{
-			String query ="INSERT INTO reservations (tripDate, departure, destination, travelPurpose, passengers, passengerNum, employeeID) values (?,?,?,?,?,?,?)";
+			String query ="INSERT INTO reservations (tripDate, departure, destination, travelPurpose, passengers, passengerNum, employeeID, statusID, trackingID, departmentID) values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = connection.prepareStatement(query);
 			
 			SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -83,6 +83,21 @@ public class ReservationSender {
             
             String departureFull = getTimeHours()+":"+getTimeMinutes()+" "+getTimeOfDay();
             
+            int tracking = 1;
+            switch(accType){
+	            case 1:
+	            	break;
+	            case 2:
+	            	tracking = 2;
+	            	break;
+	            case 3:
+	            	tracking = 4;
+	            	break;
+	            default:
+	            	tracking = 1;
+	            	break;
+            }
+            
 			pstmt.setDate(1, sqlDate);
 			pstmt.setString(2, departureFull);
 			pstmt.setString(3, getDestination());
@@ -90,6 +105,9 @@ public class ReservationSender {
 			pstmt.setString(5,getPassengers());
 			pstmt.setInt(6, Integer.parseInt(getNumPassengers()));
 			pstmt.setInt(7, getEmpId());
+			pstmt.setInt(8, 1);
+			pstmt.setInt(9, tracking);
+			pstmt.setInt(10, dept);
 			pstmt.executeUpdate();
 		}catch(SQLException sqle){
 			System.out.println(sqle);

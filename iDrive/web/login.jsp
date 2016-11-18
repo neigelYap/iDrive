@@ -11,6 +11,8 @@
 		}
 	}
 %>
+<%@ page import="net.tanesha.recaptcha.ReCaptcha"%>
+<%@ page import="net.tanesha.recaptcha.ReCaptchaFactory"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 5.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -62,6 +64,12 @@
     	<label for="password">Password:</label>
 	    <input type="password" class="form-control" name="password" id="password" placeholder="Password"required="required">
   	</div>
+  	<div class="form-group">
+  		<%
+          ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LfQNwwUAAAAAFAkuWhLKP_cDeCORsHW1vswPxcO", "6LfQNwwUAAAAAERiI2YtwOyJeWt_iyaTJzAiEb9F", false);
+          out.print(c.createRecaptchaHtml("Answer is wrong",null));
+        %>
+        </div>
   	<div class="form-group">
 <a href="google.com"><b>Forgot your password?</b></a></div>
   	<div class="form-group"> 
