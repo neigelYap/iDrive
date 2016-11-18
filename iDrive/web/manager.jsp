@@ -18,28 +18,48 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 5.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head style="height:100%;">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="base2.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/ionicons.min.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/normalize.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/component.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/content.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/ekko-lightbox.min.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/dark.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/owl.carousel.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/animate.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/fractionslider.css" type="text/css">
+<link rel="stylesheet" href="http://iacademy.edu.ph/assets/themes/version2/css/agency.css?update=2016-11-15%2009:04:26" type="text/css">
+
 <title>iDrive</title>
 </head>
-<body>
-<div class="navbar navbar-default navbar-static-top">
+<body style="background: rgb(237, 238, 238);">
+<div class="navbar navbar-default navbar-static-top"style="background:#014FB3;">
 <div class="container">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">
-			iDrive
-			</a>
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+			<a class="navbar-brand"><img style="width: 36px;margin-top: -10px;margin-left: -15px" src="crest.png"><img src="logo-white.png" alt="iDrive" style="width:130px;margin-bottom: 15px;margin-top: -40px;margin-left: 30px;"></a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+		
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="logoutservlet.html">Logout</a></li>
+		</ul>
 		</div>
 	</div>
 	</div>
 </div>
-<div class="container">
+<div class="container inner-page">
+<!-- <img src="logo.png" alt="iDrive" style="width:250px;margin-bottom: 15px;margin-top: -30px;"> -->
 <div class="row">
   <div class="col-sm-6">
-	<div class="well">
-	<legend>Trip Ticket Form</legend>
+	<legend><b>TRIP TICKET FORM</b></legend>
 	<%
 		String error = (String)request.getAttribute("errorMsg");
 		String success = (String)request.getAttribute("successMsg");
@@ -112,11 +132,11 @@
 				<input type="number" id="numPassengers" min="1" max="25" class="form-control" name="numPassengers" required="required"placeholder="Total number of included passengers"/>
 		</div>
 		<div class="form-group">
-			<button type="submit" class="btn btn-success">Submit</button>
-			<button type="reset" class="btn btn-primary">Reset</button>	
-		</div>	
+			<button type="submit" class="btn btn-success" style="border-color: #52a55f;text-transform: uppercase;font-weight: 700;color: #fff !important;background-color: #52a55f;border-radius: 0;">
+				Submit
+			</button>
+		</div>		
 	</form>
-	</div>
 	</div>
 	<div class="col-sm-6">
 	<div class="well">
@@ -126,14 +146,10 @@
 			String fullName = first+" "+last;
 			out.println("<h3>"+fullName+"</h3>");
 		%>
-		<form action="logoutservlet.html" method="post">
-			<div class="form-group"> 
-		    	<button type="submit" class="btn btn-primary">Logout</button>
-	  		</div>
-		</form>
 	</div>
 	</div>
 </div>
+<hr style="border-color: #014FB3;">
 </div>
 </body>
 </html>

@@ -14,13 +14,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 5.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html style="height:100%;">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="base2.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/ionicons.min.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/normalize.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/component.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/content.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/ekko-lightbox.min.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/dark.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/owl.carousel.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/animate.css" type="text/css">
+<link rel="stylesheet" href="https://www.iacademy.edu.ph/assets/themes/version2/css/fractionslider.css" type="text/css">
+
 <title>iDrive</title>
 </head>
-<body>
+<body style="background:url('http://iacademy.edu.ph/assets/themes/version2/images/portal-images/home-bg.jpg') no-repeat center center;background-size:cover;background-position:fixed;height:100%;">
 <div class="container">
 <div class="row">
   <div class="col-sm-4"></div>
@@ -29,7 +40,9 @@
 </div>
 <div class="row">
   <div class="col-md-4"></div>
-  <div class="col-md-4"><h2 style="margin-top: 200px">iDrive</h2>
+  <div class="col-md-4">
+<center><img style="width: 80px;margin-bottom: 10px;margin-top: 80px;" src="crest2.png"></center>
+<center><img src="logo-white.png" alt="iDrive" style="width:300px;margin-bottom: 10px;"></center>
 <div class="well">
 	<%
 		String error = (String)request.getAttribute("invalid");
@@ -52,7 +65,7 @@
   	<div class="form-group">
 <a href="google.com"><b>Forgot your password?</b></a></div>
   	<div class="form-group"> 
-	    <center><button type="submit" class="btn btn-primary btn-block">Login</button></center>
+	    <center><button type="submit" class="btn btn-primary btn-block"style="text-transform: uppercase;font-weight: 700;color: #fff !important;background-color: #3c8dbc;border-radius: 0;">Login</button></center>
   	</div>
 	</form>
 </div>
