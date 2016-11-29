@@ -24,6 +24,7 @@ public class LogoutServlet extends HttpServlet {
 		session.removeAttribute("lName");
 		session.removeAttribute("deptName");
 		session.removeAttribute("email");
+		session.removeAttribute("pending");
 		session.invalidate();
 		
 		response.sendRedirect("login");

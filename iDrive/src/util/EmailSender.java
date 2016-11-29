@@ -75,48 +75,59 @@ public class EmailSender {
 	}
 	//When reservation form is first sent to the managers or the administrator (if the managers are the ones
 	//who sent it).
-	public void reservationSent(Connection connection, int accType, String department){
-		String receiver="";
-		int receiverAccType;
-		if(accType == 1){
-			receiverAccType = 2;
-		}else{
-			receiverAccType = 3;
-		}
-		
+	public void reservationSent(Connection connection, int accType, int department, String employeeName, String tripDate, String hours, String minutes, String timeOfDay, String destination,
+								String numPassengers, String purpose){
 		googleMailSession();
+		 
+		String receiver="";
+		String receiverName="";
+			int receiverAccType;
+			if(accType == 1){
+				receiverAccType = 2;
+			}else{
+				receiverAccType = 3;
+			}
+			
+		MimeMessage message = new MimeMessage(session);
+
+        String query = "SELECT * FROM employee WHERE departmentName = ? AND accountTypeID =  ?";
 		try{
 			if(receiverAccType==2){
-				String query = "SELECT * FROM employee WHERE departmentName = ? AND accountTypeID =  ?";
 				PreparedStatement pstmt = connection.prepareStatement(query);
-				pstmt.setString( 1, department);
+				pstmt.setInt( 1, department);
 				pstmt.setInt( 2, receiverAccType); 
 				ResultSet rs =pstmt.executeQuery();
 				if(rs.next()){
 					receiver = rs.getString("email");
+					receiverName = rs.getString("firstName") + " " + rs.getString("lastName");
 				}else{
 					
 				}
 			}else if(receiverAccType==3){
-				String query = "SELECT * FROM employee WHERE accountTypeID = ? AND departmentName = ?";
 				PreparedStatement pstmt = connection.prepareStatement(query);
-				pstmt.setInt( 1, receiverAccType);
-				pstmt.setString( 2, "FACILITIES");
+				pstmt.setInt(1, receiverAccType);
+				pstmt.setInt(2, 1);
 				ResultSet rs =pstmt.executeQuery();
 				if(rs.next()){
 					receiver = rs.getString("email");
+					receiverName = rs.getString("firstName") + " " + rs.getString("lastName");
 				}else{
 					
 				}
 			}
-	         MimeMessage message = new MimeMessage(session);
-
-	         message.setFrom(new InternetAddress(sender));
-	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
-	         message.setSubject("New Reservation Request");
-	         message.setText("Good Day! There is a new request for a Trip Reservation. Please login to your account "
-	         		+ "to validate this pending request.\n\n\n"
-	         		+"<PLEASE DO NOT REPLY, THIS IS AN AUTO-GENERATED EMAIL>");
+			message.setFrom(new InternetAddress(sender));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+			message.setSubject("iDrive - New Reservation Request");
+	       
+			message.setText("Good Day, " + receiverName.toUpperCase() + " ! \n\n"
+		 			+ employeeName + " has requested for a trip reservation with the following details: \n\n"
+	         		+ "Trip Date: " + tripDate + "\n"
+	         		+ "Departure Time: " + hours + ":" + minutes + " " + timeOfDay + "\n"
+	         		+ "Destination: " + destination + "\n"
+	         		+ "Number of Passengers: " + numPassengers + "\n\n"
+	         		+ "The purpose of this trip is to as stated by " + employeeName + ": " + purpose + "\n" 
+	         		+"\n\n<PLEASE DO NOT REPLY, THIS IS AN AUTO-GENERATED EMAIL>");
+			
 	         Transport.send(message);
 	         
 	     }catch (MessagingException mex) {
@@ -137,8 +148,7 @@ public class EmailSender {
 	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
 	         message.setSubject("Manager Approval");
 	         message.setText("Good Day! Your reservation on " + date + " has been approved by your Department Manager."
-	         		+ "It is now currently pending for approval by the Administrator.");
-	         message.setText("<PLEASE DO NOT REPLY, THIS IS AN AUTO-GENERATED EMAIL>");
+	         		+ "It is now currently pending for approval by the Administrator."+"\n\n<PLEASE DO NOT REPLY, THIS IS AN AUTO-GENERATED EMAIL>");
 	         Transport.send(message);
 	         
 	     }catch (MessagingException mex) {

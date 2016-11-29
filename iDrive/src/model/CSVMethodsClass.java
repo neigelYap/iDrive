@@ -42,7 +42,7 @@ public class CSVMethodsClass {
 				
 				if(columns.length == 6){
 					if(validateName(columns[0]) == true && validateName(columns[1]) == true && validateEmail(columns[2]) == true
-							&& validateID(columns[4]) == true && validatePosition(columns[5])==true){
+							&& validateID(columns[4]) == true && validatePosition(columns[5])==true&&validateDepartments(columns[3])==true){
 						System.out.println("\nFirst Name: " + columns[0]);
 						System.out.println("Last Name: " + columns[1]);
 						System.out.println("Email: " + columns[2]);
@@ -52,7 +52,7 @@ public class CSVMethodsClass {
 					} 
 				} else if (columns.length == 7){
 					if(validateName(columns[0]) == true && validateName(columns[1]) == true && validateEmail(columns[2]) == true
-							&& validateID(columns[4]) == true && validatePosition(columns[5])==true && validateAction(columns[6]) == true){
+							&& validateID(columns[4]) == true && validatePosition(columns[5])==true && validateAction(columns[6]) == true&&validateDepartments(columns[3])==true){
 						System.out.println("\nFirst Name: " + columns[0]);
 						System.out.println("Last Name: " + columns[1]);
 						System.out.println("Email: " + columns[2]);
@@ -104,7 +104,7 @@ public class CSVMethodsClass {
 	}
 	
 	private static boolean validateID(String text){
-		if(text.matches("[0-9]+") && text.length() == 9){
+		if(text.matches("[0-9]+") && text.length() == 6){
 			return true;
 		} else {
 			return false;
@@ -122,6 +122,14 @@ public class CSVMethodsClass {
 			return false;
 		}
 	}
+	
+	private static boolean validateDepartments(String text){
+		if(text.matches("[0-9]+")){
+			return true;
+		} else {
+			return false;
+		}
+    }
 	
 	private void checkDirectory(){
 		File file = new File("C:\\iDriveCSV");
@@ -201,7 +209,7 @@ public class CSVMethodsClass {
 			}
 
 			String query="";
-			if(columns[6].equals("A") && result == false){
+			if(columns[6].toUpperCase().equals("A") && result == false){
 				query ="INSERT INTO employee (employeeID, firstName, lastName, departmentName, email, pass, accountTypeID) values (?,?,?,?,?,?,?)";
 				PreparedStatement pstmt = connection.prepareStatement(query);
 				pstmt.setInt(1, Integer.parseInt(columns[4])); //empId

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Validate;
+//import net.tanesha.recaptcha.ReCaptchaImpl;
+//import net.tanesha.recaptcha.ReCaptchaResponse;
+import util.VerifyRecaptcha;
 public class AccountCheckerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection connection = null;
@@ -45,6 +48,19 @@ public class AccountCheckerServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+//		String remoteAddr = request.getRemoteAddr();
+//	    ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+//	    reCaptcha.setPrivateKey("6LfQNwwUAAAAAERiI2YtwOyJeWt_iyaTJzAiEb9F");
+//	
+//	    String challenge = request.getParameter("recaptcha_challenge_field");
+//	    String uresponse = request.getParameter("recaptcha_response_field");
+//	    ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+		
+		String gRecaptchaResponse = request
+				.getParameter("g-recaptcha-response");
+		System.out.println(gRecaptchaResponse);
+		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+
 		String user = request.getParameter("username");
 		String password =  request.getParameter("password");
 		
@@ -67,15 +83,20 @@ public class AccountCheckerServlet extends HttpServlet {
 				int accountType = val.accountChecker(connection);
 				
 				if(accountType != 0){
-					request.setAttribute("account", username);
-					request.setAttribute("type", accountType);
-					request.setAttribute("pass", password);
-					request.setAttribute("fName", val.getfName());
-					request.setAttribute("lName", val.getlName());
-					request.setAttribute("deptName", val.getDeptName());
-					request.setAttribute("email", val.getEmail());
-					
-					request.getRequestDispatcher("accountseparator.html").forward(request,response);
+					if(verify){
+						request.setAttribute("account", username);
+						request.setAttribute("type", accountType);
+						request.setAttribute("pass", password);
+						request.setAttribute("fName", val.getfName());
+						request.setAttribute("lName", val.getlName());
+						request.setAttribute("deptName", val.getDeptName());
+						request.setAttribute("email", val.getEmail());
+						
+						request.getRequestDispatcher("accountseparator.html").forward(request,response);
+					}else{
+						request.setAttribute("invalid", "CAPTCHA code was incorrect");
+						request.getRequestDispatcher("login").include(request,response);
+					}
 				}else{
 					request.setAttribute("invalid", "Invalid username or password, try again");
 					request.getRequestDispatcher("login").forward(request,response);

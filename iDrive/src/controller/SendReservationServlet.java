@@ -67,7 +67,10 @@ public class SendReservationServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int accType = (Integer)session.getAttribute("type");
 		int empId = (Integer)session.getAttribute("account");
-		String department = (String)session.getAttribute("deptName");
+		int department = (Integer)session.getAttribute("deptName");
+		String fName = (String) session.getAttribute("fName");
+		String lName = (String) session.getAttribute("lName");
+		String fullName = fName+" "+lName;
 		switch(accType){
 			case 1: 
 				location = "employee";
@@ -101,9 +104,9 @@ public class SendReservationServlet extends HttpServlet {
 								sender.setNumPassengers(numPassengers);
 								sender.setPassengers(passengers);
 								sender.setEmpId(empId);
-								sender.sendReservation(connection);
+								sender.sendReservation(connection, accType, department);
 								EmailSender emSend = new EmailSender();
-								emSend.reservationSent(connection,accType,department);
+								emSend.reservationSent(connection,accType,department, fullName,date,timeHours,timeMinutes,timeOfDay,destination,numPassengers,purpose);
 								request.setAttribute("successMsg", "Reservation has been successfully sent for approval");
 								request.getRequestDispatcher(location).forward(request,response);
 							} else {
@@ -121,7 +124,7 @@ public class SendReservationServlet extends HttpServlet {
 					} else {
 						//error for purpose input message
 						System.out.println(validate.purposeInputValidation(purpose));
-						request.setAttribute("errorMsg", "");
+						request.setAttribute("errorMsg", "Please enter a valid purpose of travel");
 						request.getRequestDispatcher(location).forward(request,response);
 					}
 				} else {
@@ -139,7 +142,7 @@ public class SendReservationServlet extends HttpServlet {
 		} else {
 			//error for trip date message
 			System.out.println(validate.dateInputValidation(date));
-			request.setAttribute("errorMsg", "Please enter a date 3 days before departure");
+			request.setAttribute("errorMsg", "Please enter a date 3 days before departure or within the next three months");
 			request.getRequestDispatcher(location).forward(request,response);
 		}
 		
